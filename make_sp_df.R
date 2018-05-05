@@ -44,6 +44,7 @@ write.csv(plant_df, "Data/plant_df.csv", row.names = FALSE)
 #plant_df <- read.csv("Data/plant_df.csv")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # bind_rows of ruby_df and plant_df
 sp_df <- bind_rows(plant_df, ruby_df)
@@ -60,11 +61,16 @@ sp_df <- bind_rows(sp_df, spring_df)
 # bind_rows of ruby_df and plant_df
 sp_df <- bind_rows(plant_df, ruby_df)
 >>>>>>> add-DomFunction
+=======
+# bind_rows of ruby_df and plant_df
+sp_df <- bind_rows(plant_df, ruby_df)
+>>>>>>> add-DomFunction
 # remove NA's
 sp_df <- na.omit(sp_df)
 # filter out observations before 1980
 sp_df <- sp_df[sp_df$year>=1980,]
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 write.csv(sp_df, "Data/sp_df.csv", row.names = FALSE)
@@ -72,6 +78,9 @@ write.csv(sp_df, "Data/sp_df.csv", row.names = FALSE)
 
 
 
+=======
+write.csv(sp_df, "Data/sp_df.csv", row.names = FALSE)
+>>>>>>> add-DomFunction
 =======
 write.csv(sp_df, "Data/sp_df.csv", row.names = FALSE)
 >>>>>>> add-DomFunction
