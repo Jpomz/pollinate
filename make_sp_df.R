@@ -43,6 +43,7 @@ plant_df <- ldply(plant_list)
 write.csv(plant_df, "Data/plant_df.csv", row.names = FALSE)
 #plant_df <- read.csv("Data/plant_df.csv")
 
+
 # bind_rows of ruby_df and plant_df
 sp_df <- bind_rows(plant_df, ruby_df)
 # remove NA's
@@ -50,4 +51,20 @@ sp_df <- na.omit(sp_df)
 # filter out observations before 1980
 sp_df <- sp_df[sp_df$year>=1980,]
 
+
+
+# spring indicators
+spring_plant_names <- c("Lonicera tatarica", "Lonicera korolkowii", "Syringa chinensis")
+
+spring_list <- foreach(sp = 1:length(spring_plant_names)) %dopar%
+  get_bird_data(spring_plant_names[sp], limit = 100000)
+spring_df <- ldply(spring_list)
+# read.csv("Data/sp_df.csv")
+sp_df <- bind_rows(sp_df, spring_df)
+
+
 write.csv(sp_df, "Data/sp_df.csv", row.names = FALSE)
+
+
+
+
