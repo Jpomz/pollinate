@@ -14,7 +14,7 @@ get_bird_data <- function(taxon_name, limit = 500){
                            %in% colnames_string]
   tax_occ_df <- tax_occ_df[tax_occ_df$countryCode=="US", ]
   tax_occ_df <- tax_occ_df[,
-                  which(colnames(tax_occ_df) %in%
+                  -which(colnames(tax_occ_df) %in%
                           "countryCode")]
   names(tax_occ_df)[1] <- "species"
   tax_occ_df <- tax_occ_df[,c(1,3,2,5,6,4)]
