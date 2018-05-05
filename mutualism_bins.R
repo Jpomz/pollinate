@@ -29,3 +29,13 @@ Add_Box<-function(data_table){
   sort_datatable<-data_table[,c(1,4,5,6,7)]
   return(sort_datatable)
 }
+install.packages("binr")
+githubinstall("binr")
+install.packages("githubinstall")
+library(githubinstall)
+
+data.table<-pollen_trend
+trendy_function<-function(data.table) {
+  data_table["occur"]<-NA
+  data_table$occur<-
+}
