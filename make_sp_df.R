@@ -43,6 +43,12 @@ plant_df <- ldply(plant_list)
 write.csv(plant_df, "Data/plant_df.csv", row.names = FALSE)
 #plant_df <- read.csv("Data/plant_df.csv")
 
+# spring indicators
+spring_plant_names <- c("Lonicera tatarica", "Lonicera korolkowii", "Syringa chinensis")
+spring_list <- foreach(sp = 1:length(spring_plant_names)) %dopar%
+  get_bird_data(spring_plant_names[sp], limit = 100000)
+
+
 # bind_rows of ruby_df and plant_df
 sp_df <- bind_rows(plant_df, ruby_df)
 # remove NA's
