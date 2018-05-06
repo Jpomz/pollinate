@@ -35,7 +35,19 @@ install.packages("githubinstall")
 library(githubinstall)
 
 data.table<-pollen_trend
+year_pollen<-pollen_trend[,c(2,3)]
+pollen<-year_pollen$pollen
+year<-year_pollen$year
+year_pollen["sum"]<-NA
+year_pollen$sum<-sum(pollen,year)
+pollen<-data.table$pollen
 trendy_function<-function(data.table) {
-  data_table["occur"]<-NA
-  data_table$occur<-
+  data.table["proportion"]<-NA
+  data.table$proportion<-data.table%>%
+    group_by(month)%>%
+    mutate(tot = sum(pollen),rel=pollen/tot)
+  data.table["occur"]<-NA
+  data.table$occur<-
+    ifelse(data.table$proportion >= 0.15,1,0 
+      )
 }
