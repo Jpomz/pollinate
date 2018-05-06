@@ -51,3 +51,12 @@ trendy_function<-function(data.table) {
     ifelse(data.table$proportion >= 0.15,1,0 
       )
 }
+
+table_1y <- filter(obs_per_unit, year == year)%>%
+  unite("date",c("year", "month"), sep="-")
+
+state1 <- filter(table_1y , box == 1)%>%
+  group_by(species, pollen, date) %>%
+  summarise(n=n())
+
+
