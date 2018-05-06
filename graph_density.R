@@ -3,6 +3,7 @@ library(gridExtra)
 library(dplyr)
 library(tidyr)
 
+
 master_table <- read.csv(obs_per_unit.csv, header = T, sep =";")
 
 dens_plot <- function(master_table,box1,box2,box3, year){
