@@ -29,3 +29,38 @@ Add_Box<-function(data_table){
   sort_datatable<-data_table[,c(1,4,5,6,7)]
   return(sort_datatable)
 }
+<<<<<<< HEAD
+=======
+install.packages("binr")
+githubinstall("binr")
+install.packages("githubinstall")
+library(githubinstall)
+
+
+data.table<-pollen_trend
+year_pollen<-pollen_trend[,c(2,3)]
+pollen<-year_pollen$pollen
+year<-year_pollen$year
+year_pollen["sum"]<-NA
+year_pollen$sum<-sum(pollen,year)
+pollen<-data.table$pollen
+trendy_function<-function(data.table) {
+  data.table["proportion"]<-NA
+  data.table$proportion<-data.table%>%
+    group_by(month)%>%
+    mutate(tot = sum(pollen),rel=pollen/tot)
+  data.table["occur"]<-NA
+  data.table$occur<-
+    ifelse(data.table$proportion >= 0.15,1,0 
+      )
+}
+
+table_1y <- filter(obs_per_unit, year == year)%>%
+  unite("date",c("year", "month"), sep="-")
+
+state1 <- filter(table_1y , box == 1)%>%
+  group_by(species, pollen, date) %>%
+  summarise(n=n())
+
+
+>>>>>>> GregFile
