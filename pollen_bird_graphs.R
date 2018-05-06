@@ -1,12 +1,12 @@
 library(ggplot2)
 library(dplyr)
 result_table <- read.csv("Data/result_table.csv")
-head(result_table)
+#head(result_table)
 
-summary(result_table$bird)
-sort(log10(result_table$bird))
-sort(log10(result_table$pollen))
-plot(log10(pollen+1)~log10(bird+1), data = result_table)
+# summary(result_table$bird)
+# sort(log10(result_table$bird))
+# sort(log10(result_table$pollen))
+# plot(log10(pollen+1)~log10(bird+1), data = result_table)
 
 result_table$bins <- cut(result_table$bird, breaks = 5)
 
@@ -35,6 +35,7 @@ ggplot(summary_table, aes(x = bins, y = mean.pollen,
   labs(x = 'Log10 Bird observations',
        y = 'Log10 Pollen searches') +
   theme_bw()
+ggsave("Figure/Pollen_bird_bin.png")
 
 # plot bird obs ~ pollen
 ggplot(result_table, aes(x = log10(pollen+1),
@@ -49,6 +50,7 @@ ggplot(result_table, aes(x = log10(pollen+1),
   labs(x = 'Log10 Pollen searches',
        y = 'Log10 Bird observations') +
   theme_bw()
+ggsave("Figure/Bird_obs_by_pollen.png")
 
 # plot bird obs ~ pollen, filtered out "0" observations
 result_table %>% filter(pollen > 0, bird >0) %>%
