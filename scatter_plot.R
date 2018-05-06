@@ -1,10 +1,8 @@
 library(dplyr)
 sp_df<-read.csv("Data/sp_df.csv")
-<<<<<<< HEAD
+
 pollen<-read.csv("Data/trendy_pollen.csv")
-=======
-pollen<-read.csv("Data/")
->>>>>>> add-DomFunction
+
 source("mutualism_bins.R")
 obs_per_unit<-Add_Box(sp_df) %>% filter(box>0) %>% 
   filter(species == "Archilochus colubris") %>%
@@ -12,27 +10,11 @@ obs_per_unit<-Add_Box(sp_df) %>% filter(box>0) %>%
   left_join(pollen, by=c("month", "year","box"))
 
 source("functions_dom.R")
-<<<<<<< HEAD
-=======
 source("graph_density.R")
->>>>>>> add-DomFunction
 
 ggplot(final_test, aes(diff_temp, no_cooccurrence)) +
   geom_point(aes(color = as.factor(box)), size = 2) +
   geom_smooth(method = lm) +
-<<<<<<< HEAD
   scale_color_brewer(palette = 'Accent', labels = c('Southeast', 'Mideast','Northeast'), name = 'Region') +
   labs(x = 'Temperature anomalies (C)', y = 'Number of co-occurring days') +
   theme_bw()
-=======
-  scale_color_brewer(palette = 'Accent', labels = c('Northeast', 'Mideast','Southeast'), name = 'Region') +
-  labs(x = 'Temperature anomalies (°C)', y = 'Number of co-occurring days') +
-  theme_bw()
-
-for (year in 2004:2016){
-  for(month in 1:12){
-    test <- rbind (test, data.frame(month = rep(month, 3), year=rep(year,3), box=c(1:3), pollen=runif(3, min = 0, max = 100), occurrence = round(rnorm(3))))
-  }
-}
-test$occurrence = test$occurrence >= 1
->>>>>>> add-DomFunction
