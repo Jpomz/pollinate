@@ -25,11 +25,27 @@ write.csv(result_table, file="Data/result_table.csv",row.names=F)
 source("functions_dom.R")
 source("graph_density.R")
 
+florida_climate <- florida_climate %>%
+  mutate(box=1)
+northcarolina_climate <- northcarolina_climate %>%
+  mutate(box=2)
+maine_climate <- maine_climate %>%
+  mutate(box=3)
 
+climate <- rbind(florida_climate, northcarolina_climate) %>%
+  rbind(maine_climate) %>%
+  rename(temp=yearly_average)
 
-ggplot(final_test, aes(diff_temp, no_cooccurrence)) +
-  geom_point(aes(color = as.factor(box)), size = 2) +
-  geom_smooth(method = lm) +
+scatter_data <- get_cooccurrence_temp(obs_per_unit, 1000, climate)
+
+scatter_plot <- scatter_data %>% filter(diff_temp >-1.5)%>%
+  ggplot( aes(diff_temp, no_cooccurrence, color =as.factor(box))) +
+  geom_point( size = 2) +
+  geom_smooth(method="lm", alpha = 0.1)+
   scale_color_brewer(palette = 'Accent', labels = c('Southeast', 'Mideast','Northeast'), name = 'Region') +
   labs(x = 'Temperature anomalies (C)', y = 'Number of co-occurring days') +
   theme_bw()
+
+png(filename="Figure/scatter_plot.png", width=600, height=600)
+scatter_plot
+dev.off()
