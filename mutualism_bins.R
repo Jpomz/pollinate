@@ -34,6 +34,7 @@ githubinstall("binr")
 install.packages("githubinstall")
 library(githubinstall)
 
+
 data.table<-pollen_trend
 year_pollen<-pollen_trend[,c(2,3)]
 pollen<-year_pollen$pollen
