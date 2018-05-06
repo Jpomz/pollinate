@@ -21,6 +21,7 @@ dens_plot <- function(master_table, yr){
       gather(species, count, pollen:bird)
   
     p1 <- ggplot(table_1y, aes(x= month, y = count, color = species, fill= species))+
+    ylim(0,500) +
     geom_area(alpha=0.4)+
     theme_bw()+
     theme(panel.grid.major = element_blank())+
@@ -33,6 +34,7 @@ dens_plot <- function(master_table, yr){
 
     p2 <- ggplot(table_2y, aes(x= month, y = count, color = species, fill= species))+
         geom_area(alpha=0.4)+
+        ylim(0,500) +
         theme_bw()+
         theme(panel.grid.major = element_blank())+
         scale_x_continuous("months", breaks=1:12 , labels=c("J", "F","M","A","M","J","JL","A","S","O","N","D"))+ 
@@ -43,6 +45,7 @@ dens_plot <- function(master_table, yr){
         ggtitle("Mid-East")
   
     p3 <- ggplot(table_3y, aes(x= month, y = count, color = species, fill= species))+
+        ylim(0,500) +
         geom_area(alpha=0.4)+
         theme_bw()+
         theme(panel.grid.major = element_blank())+
