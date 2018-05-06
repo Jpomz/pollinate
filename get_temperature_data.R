@@ -62,8 +62,10 @@ saveRDS(ME, "Data/ME_daily_temp_1980_2016")
 
 monthly <- function(dat){
   library(dplyr)
-  dat %>% group_by(year, month) %>%
-    summarize(monthly_average = mean(tmin+tmax)) 
+  dat %>% 
+    mutate(daily = (tmin+tmax)/2) %>%
+    group_by(year, month) %>%
+    summarize(monthly = mean(daily))
 }
 
 FL_monthly <- monthly(FL)
@@ -77,12 +79,12 @@ write.csv(ME_monthly, "Data/ME_monthly_average.csv", row.names = FALSE)
 yearly <- function(dat){
   library(dplyr)
   dat %>% group_by(year) %>%
-    summarize(yearly_average = mean(tmin+tmax)) 
+    summarize(yearly_average = mean(monthly)) 
 }
 
-FL_yearly <- yearly(FL)
+FL_yearly <- yearly(FL_monthly)
 write.csv(FL_yearly, "Data/FL_yearly.csv", row.names = FALSE)
-NC_yearly <- yearly(NC)
+NC_yearly <- yearly(NC_monthly)
 write.csv(NC_yearly, "Data/NC_yearly.csv", row.names = FALSE)
-ME_yearly <- yearly(ME)
+ME_yearly <- yearly(ME_monthly)
 write.csv(ME_yearly, "Data/ME_yearly.csv", row.names = FALSE)
